@@ -14,10 +14,11 @@ export class AppComponent implements OnInit {
   displayedColumns: string[] = ["test"];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   data = [{ test: "value" }];
-
+  originalData = this.data
   buckets: String[] = [];
   selectedBucket: String = "";
   jsonFiles: String[] = [];
+  changedColumns: any = {};
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -41,9 +42,28 @@ export class AppComponent implements OnInit {
       this.displayedColumns = Object.keys(data[0]);
       this.columnsToDisplay = this.displayedColumns.slice();
       this.data = removeArraysFromObjs(data);
+      this.originalData = this.data;
     })
   }
-
+  onSearchColumn(event: any, column: any){
+    console.log(event)
+    const filteredRows = []
+    this.changedColumns[column] = event;
+    console.log(this.changedColumns)
+    for(let obj of this.originalData) {
+      let allChecked = true;
+      for(let col in this.changedColumns)
+      {
+        if(!obj[col].includes(this.changedColumns[col])) {
+          allChecked = false;
+        }
+      }
+      if(allChecked)
+        filteredRows.push(obj)
+    }
+    this.data = filteredRows
+    console.log(filteredRows)
+  }
 
   ngOnInit() {
     this.dtOptions = {
