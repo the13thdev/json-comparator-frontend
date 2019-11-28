@@ -313,6 +313,15 @@
     </mat-select>
   </mat-form-field>
 
+  <h4>Columns</h4>
+  <mat-form-field>
+    <mat-label>JsonFiles</mat-label>
+    <mat-select (selectionChange)="onFilterColumn($event.value)" multiple [(value)]="columns">
+      <mat-option *ngFor="let column of displayedColumns" [value]="column">
+        {{column}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <table id="json-table" mat-table [dataSource]="data" class="mat-elevation-z8">
     <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">

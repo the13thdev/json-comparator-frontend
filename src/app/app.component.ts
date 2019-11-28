@@ -11,6 +11,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 export class AppComponent implements OnInit {
   database: JsonDatabase | null;
   dtOptions: DataTables.Settings = {};
+  columns: string[];
   displayedColumns: string[] = ["test"];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   data = [{ test: "value" }];
@@ -41,9 +42,14 @@ export class AppComponent implements OnInit {
       // console.log(Object.keys(data[0]))
       this.displayedColumns = Object.keys(data[0]);
       this.columnsToDisplay = this.displayedColumns.slice();
+      this.columns = this.displayedColumns;
       this.data = removeArraysFromObjs(data);
       this.originalData = this.data;
     })
+  }
+
+  onFilterColumn(event:any) {
+    this.columnsToDisplay = event
   }
   onSearchColumn(event: any, column: any){
     console.log(event)
