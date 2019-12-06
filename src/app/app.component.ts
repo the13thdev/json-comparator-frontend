@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   selectedBucket: String = "";
   jsonFiles: String[] = [];
   changedColumns: any = {};
+  differenceKeysForEach: Map<any, Set<any>> = new Map<any, Set<any>>();
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -45,12 +46,37 @@ export class AppComponent implements OnInit {
       this.columns = this.displayedColumns;
       this.data = removeArraysFromObjs(data);
       this.originalData = this.data;
+      this.findAndTagDifferences();
     })
+  }
+
+  findAndTagDifferences() {
+
+    for(let key of this.displayedColumns)
+    {
+      for(let [index,obj] of this.data.entries())
+      {
+        
+        if(!this.differenceKeysForEach.get(obj)) {
+          const x = new Set<any>();
+          this.differenceKeysForEach.set(obj, x);
+        }
+        if(index == 0)
+        {
+          continue;
+        }
+        if(obj[key] != this.data[index-1][key]) {
+          this.differenceKeysForEach.get(obj).add(key);
+        }
+      }
+    }
+    console.log(this.differenceKeysForEach);
   }
 
   onFilterColumn(event:any) {
     this.columnsToDisplay = event
   }
+
   onSearchColumn(event: any, column: any){
     console.log(event)
     const filteredRows = []
@@ -68,6 +94,9 @@ export class AppComponent implements OnInit {
         filteredRows.push(obj)
     }
     this.data = filteredRows
+    this.differenceKeysForEach.clear();
+    this.findAndTagDifferences();
+
     console.log(filteredRows)
   }
 
@@ -76,7 +105,7 @@ export class AppComponent implements OnInit {
       scrollX: true,
       scrollY: "300"
     };
-
+    this.findAndTagDifferences();
     this.database = new JsonDatabase(this._httpClient);
     this.database.getBuckets().subscribe(data => {
       console.log("buckets received:")

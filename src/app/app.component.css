@@ -1,7 +1,15 @@
 table {
     width: 100%;
   }
-
+  
+.filter {
+  display: block;
+}
+  .header {
+    padding: 5px;
+    font-size: 1pc;
+    font-weight: bold;
+  }
   .navbar-title{
     padding: 0 1em;
   }
