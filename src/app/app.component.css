@@ -16,10 +16,6 @@ table {
   padding: 0em 3em;
 }
 
-.left-bar {
-  padding: 32px 0px 32px 30px;
-}
-
 .left-bar mat-form-field {
   width: 100%;
 }
@@ -28,15 +24,23 @@ table {
   margin-top: 1em;
 }
 
+.left-bar {
+  padding: 32px 32px 32px 30px;
+  background-color: #FAFAFA;
+  height: 90vh;
+}
+
 .main-section {
   max-height: 90vh;
   overflow: auto;
-  padding: 32px 0px 32px 30px;
+  padding: 0px;
+  /* padding: 32px 0px 32px 30px; */
 }
 
 .custom-content {
   padding: 0px !important;
   margin: 0px !important;
+  /* background-color: #FAFAFA; */
 }
 
 .container .row, .container-fluid .row {
