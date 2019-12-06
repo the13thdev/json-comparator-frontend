@@ -9,6 +9,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 })
 
 export class AppComponent implements OnInit {
+  columnPanelOpenState = false;
   database: JsonDatabase | null;
   dtOptions: DataTables.Settings = {};
   columns: string[];

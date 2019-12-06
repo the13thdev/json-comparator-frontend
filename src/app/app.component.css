@@ -1,9 +1,3 @@
-.example-container {
-  height: 50pc;
-  width: 90pc;
-  overflow: auto;
-}
-
 table {
   width: 100%;
 }
@@ -11,11 +5,44 @@ table {
 .filter {
   display: block;
 }
-  .header {
-    padding: 5px;
-    font-size: 1pc;
-    font-weight: bold;
-  }
-  .navbar-title{
-    padding: 0 1em;
-  }
+
+.header {
+  padding: 5px;
+  font-size: 1pc;
+  font-weight: bold;
+}
+
+.navbar-title {
+  padding: 0em 3em;
+}
+
+.left-bar {
+  padding: 32px 0px 32px 30px;
+}
+
+.left-bar mat-form-field {
+  width: 100%;
+}
+
+.filterting-options {
+  margin-top: 1em;
+}
+
+.main-section {
+  max-height: 90vh;
+  overflow: auto;
+  padding: 32px 0px 32px 30px;
+}
+
+.custom-content {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.container .row, .container-fluid .row {
+  width: 100%;
+}
+
+.content {
+  max-width: 100% !important;
+}
