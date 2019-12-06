@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MatTableModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatGridTile, MatGridListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { DataTablesModule } from 'angular-datatables';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DataTablesModule } from 'angular-datatables';
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

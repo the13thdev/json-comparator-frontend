@@ -288,58 +288,74 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <span class="navbar-title">Json Comparator</span>
+  <span class="navbar-title">JSON COMPARATOR</span>
 </div>
 
-<div class="content" role="main">
-
-  <h4>Bucket</h4>
-  <mat-form-field>
-    <mat-label>Bucket</mat-label>
-    <mat-select (selectionChange)="onBucketChange($event.value)">
-      <mat-option *ngFor="let bucket of buckets" [value]="bucket">
-        {{bucket}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <h4>File</h4>
-  <mat-form-field>
-    <mat-label>JsonFiles</mat-label>
-    <mat-select (selectionChange)="onJsonFileChange($event.value)">
-      <mat-option *ngFor="let jsonFile of jsonFiles" [value]="jsonFile">
-        {{jsonFile}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <h4>Columns</h4>
-  <mat-form-field>
-    <mat-label>JsonFiles</mat-label>
-    <mat-select (selectionChange)="onFilterColumn($event.value)" multiple [(value)]="columns">
-      <mat-option *ngFor="let column of displayedColumns" [value]="column">
-        {{column}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <!-- [ngClass="{'highlight'}"] -->
-  <div class="example-container mat-elevation-z8">
-  <table id="json-table" mat-table [dataSource]="data">
-    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns;let i = index">
-      <th class = "header" mat-header-cell *matHeaderCellDef> 
-        {{column}}
-        <mat-form-field class = "header" floatLabel = "never">
-        <input matInput (keyup)="onSearchColumn($event.target.value,column)"> 
+<div class="content container-fluid custom-content" role="main">
+  <div class="row">
+    <div class="left-bar col-sm-2">
+      <h5>Bucket</h5>
+      <mat-form-field>
+        <mat-label>Bucket</mat-label>
+        <mat-select (selectionChange)="onBucketChange($event.value)">
+          <mat-option *ngFor="let bucket of buckets" [value]="bucket">
+            {{bucket}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      </th>
-      <td mat-cell *matCellDef="let element" 
-      [ngStyle]="{'background-color' : differenceKeysForEach.get(element).has(column) ? '#C0E7F3' : 'white' }"> 
-      {{element[column]}}
-    </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-  </table>
+
+      <h5>File</h5>
+      <mat-form-field>
+        <mat-label>Json File</mat-label>
+        <mat-select (selectionChange)="onJsonFileChange($event.value)">
+          <mat-option *ngFor="let jsonFile of jsonFiles" [value]="jsonFile">
+            {{jsonFile}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="filterting-options">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="columnPanelOpenState = false">
+            <mat-expansion-panel-header>
+              Filtering
+            </mat-expansion-panel-header>
+
+            <!-- <h5>Column</h5> -->
+            <mat-form-field>
+              <mat-label>Columns</mat-label>
+              <mat-select (selectionChange)="onFilterColumn($event.value)" multiple [(value)]="columns">
+                <mat-option *ngFor="let column of displayedColumns" [value]="column">
+                  {{column}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+    </div>
+    <!-- [ngClass="{'highlight'}"] -->
+    <div class="main-section col-sm-10">
+      <div class="mat-elevation-z8">
+        <table id="json-table" mat-table [dataSource]="data">
+          <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns;let i = index">
+            <th class="header" mat-header-cell *matHeaderCellDef>
+              {{column}}
+              <mat-form-field class="header" floatLabel="never">
+                <input matInput (keyup)="onSearchColumn($event.target.value,column)">
+              </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let element"
+              [ngStyle]="{'background-color' : differenceKeysForEach.get(element).has(column) ? '#C0E7F3' : 'white' }">
+              {{element[column]}}
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
