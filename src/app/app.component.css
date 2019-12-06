@@ -1,7 +1,13 @@
+.example-container {
+  height: 50pc;
+  width: 90pc;
+  overflow: auto;
+}
+
 table {
-    width: 100%;
-  }
-  
+  width: 100%;
+}
+
 .filter {
   display: block;
 }
