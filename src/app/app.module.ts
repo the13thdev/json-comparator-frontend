@@ -7,6 +7,19 @@ import { MatTableModule, MatFormFieldModule, MatOptionModule, MatSelectModule, M
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { DataTablesModule } from 'angular-datatables';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {
+  GoogleApiModule, 
+  GoogleApiService, 
+  GoogleAuthService, 
+  NgGapiClientConfig, 
+  NG_GAPI_CONFIG,
+  GoogleApiConfig
+} from "ng-gapi";
+
+let gapiClientConfig: NgGapiClientConfig = {
+  client_id: "487819488610-kn94d2og4t7aocfdkj9qaplif9dqvtb4.apps.googleusercontent.com",
+  discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
+};
 
 @NgModule({
   declarations: [
@@ -24,7 +37,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCardModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
