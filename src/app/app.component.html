@@ -288,6 +288,7 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
+  <img class="cap-logo" src="/assets/cap-one-logo.png">
   <span class="navbar-title">JSON COMPARATOR</span>
 </div>
 
@@ -313,30 +314,32 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <div class="filterting-options">
-        <mat-accordion>
-          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="columnPanelOpenState = false">
-            <mat-expansion-panel-header>
-              Filtering
-            </mat-expansion-panel-header>
-
-            <!-- <h5>Column</h5> -->
-            <mat-form-field>
-              <mat-label>Columns</mat-label>
-              <mat-select (selectionChange)="onFilterColumn($event.value)" multiple [(value)]="columns">
-                <mat-option *ngFor="let column of displayedColumns" [value]="column">
-                  {{column}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
-
-
       <button type="button" class="btn btn-secondary" (click)="onClickReset()" mat-button>Reset</button>
+
+
+      <div [hidden]="!showTable">
+        <button type="button" class="btn btn-success" (click)="onCSVPush()" mat-button>Push CSV</button>
+        <div class="filterting-options">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="columnPanelOpenState = false">
+              <mat-expansion-panel-header>
+                Filtering
+              </mat-expansion-panel-header>
+
+              <!-- <h5>Column</h5> -->
+              <mat-form-field>
+                <mat-label>Columns</mat-label>
+                <mat-select (selectionChange)="onFilterColumn($event.value)" multiple [(value)]="columns">
+                  <mat-option *ngFor="let column of displayedColumns" [value]="column">
+                    {{column}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
     </div>
     <!-- [ngClass="{'highlight'}"] -->
     <div class="main-section col-sm-10">
@@ -360,7 +363,7 @@
           </table>
         </div>
         <div [hidden]="showTable" class="info-text">
-            Select a file and bucket.
+          Select a file and bucket.
         </div>
       </div>
     </div>

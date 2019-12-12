@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   originalData = this.data
   buckets: String[] = [];
   selectedBucket: String = "";
+  selectedJsonFile: String = "";
   jsonFiles: String[] = [];
   changedColumns: any = {};
   differenceKeysForEach: Map<any, Set<any>> = new Map<any, Set<any>>();
@@ -54,6 +55,14 @@ export class AppComponent implements OnInit {
       this.originalData = this.data;
       this.findAndTagDifferences();
       this.showTable = true;
+    })
+  }
+
+  onCSVPush() {
+    console.log("pushing csv" + this.selectedBucket +", "+ this.selectedJsonFile);
+    this.database.exportCSVtoSheets(this.selectedBucket, this.selectedJsonFile).subscribe(data => {
+      console.log("push confirmation received:")
+      console.log(data)
     })
   }
 
@@ -145,6 +154,7 @@ var removeArraysFromObj = function (obj) {
 /** Database that the data source uses to retrieve data for the table. */
 export class JsonDatabase {
   constructor(private _httpClient: HttpClient) { }
+
   getJsonArray(bucket: String, jsonFile: String): Observable<any> {
     const requestUrl =
       `http://localhost:8080/getFile?bucket=` + bucket + `&file=` + jsonFile;
@@ -162,4 +172,11 @@ export class JsonDatabase {
       `http://localhost:8080/listObjects?bucket=` + bucket;
     return this._httpClient.get(requestUrl);
   }
+
+  exportCSVtoSheets(bucket: String, jsonFile: String): Observable<any> {
+    const requestUrl =
+      `http://localhost:8080/pushExcel?bucket=` + bucket + `&file=` + jsonFile;
+    return this._httpClient.get(requestUrl);
+  }
+
 }

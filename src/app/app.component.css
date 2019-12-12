@@ -13,24 +13,31 @@ table {
 }
 
 .navbar-title {
-  padding: 0em 3em;
-}
-
-.left-bar mat-form-field , .left-bar button{
+  font-size: 20px;
+  text-align: center;
   width: 100%;
 }
 
-.info-text{
+.left-bar mat-form-field, .left-bar button {
+  width: 100%;
+}
+
+.mat-expansion-panel{
+  background: #FAFAFA !important;
+}
+
+.info-text {
   padding: 1em;
   font-size: 1.1em;
 }
 
-.left-bar button{
-  margin: 2.5em 0em;
+.left-bar button {
+  margin: 1em 0em;
 }
 
 .filterting-options {
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .left-bar {
@@ -60,8 +67,16 @@ table {
   max-width: 100% !important;
 }
 
+.cap-logo {
+  height: 65px;
+  width: 140px;
+  position: relative;
+  padding-left: 10px;
+}
+
 .toolbar {
   margin-bottom: 0px !important;
   margin-top: 0px !important;
   height: 54px !important;
+  background-color: #043561 !important;
 }
