@@ -9,7 +9,8 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 })
 
 export class AppComponent implements OnInit {
-  columnPanelOpenState = false;
+  showTable: boolean = false;
+  columnPanelOpenState: boolean = false;
   database: JsonDatabase | null;
   dtOptions: DataTables.Settings = {};
   columns: string[];
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
   differenceKeysForEach: Map<any, Set<any>> = new Map<any, Set<any>>();
 
   constructor(private _httpClient: HttpClient) { }
+
+  onClickReset(){
+    this.showTable = false;
+  }
 
   onBucketChange(newBucket: String) {
     this.selectedBucket = newBucket;
@@ -48,6 +53,7 @@ export class AppComponent implements OnInit {
       this.data = removeArraysFromObjs(data);
       this.originalData = this.data;
       this.findAndTagDifferences();
+      this.showTable = true;
     })
   }
 

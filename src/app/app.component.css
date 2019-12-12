@@ -16,8 +16,17 @@ table {
   padding: 0em 3em;
 }
 
-.left-bar mat-form-field {
+.left-bar mat-form-field , .left-bar button{
   width: 100%;
+}
+
+.info-text{
+  padding: 1em;
+  font-size: 1.1em;
+}
+
+.left-bar button{
+  margin: 2.5em 0em;
 }
 
 .filterting-options {
@@ -49,4 +58,10 @@ table {
 
 .content {
   max-width: 100% !important;
+}
+
+.toolbar {
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  height: 54px !important;
 }
