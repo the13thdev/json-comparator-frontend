@@ -335,26 +335,33 @@
         </mat-accordion>
       </div>
 
+
+      <button type="button" class="btn btn-secondary" (click)="onClickReset()" mat-button>Reset</button>
     </div>
     <!-- [ngClass="{'highlight'}"] -->
     <div class="main-section col-sm-10">
       <div class="mat-elevation-z8">
-        <table id="json-table" mat-table [dataSource]="data">
-          <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns;let i = index">
-            <th class="header" mat-header-cell *matHeaderCellDef>
-              {{column}}
-              <mat-form-field class="header" floatLabel="never">
-                <input matInput (keyup)="onSearchColumn($event.target.value,column)">
-              </mat-form-field>
-            </th>
-            <td mat-cell *matCellDef="let element"
-              [ngStyle]="{'background-color' : differenceKeysForEach.get(element).has(column) ? '#C0E7F3' : 'white' }">
-              {{element[column]}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-        </table>
+        <div [hidden]="!showTable">
+          <table id="json-table" mat-table [dataSource]="data">
+            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns;let i = index">
+              <th class="header" mat-header-cell *matHeaderCellDef>
+                {{column}}
+                <mat-form-field class="header" floatLabel="never">
+                  <input matInput (keyup)="onSearchColumn($event.target.value,column)">
+                </mat-form-field>
+              </th>
+              <td mat-cell *matCellDef="let element"
+                [ngStyle]="{'background-color' : differenceKeysForEach.get(element).has(column) ? '#C0E7F3' : 'white' }">
+                {{element[column]}}
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+          </table>
+        </div>
+        <div [hidden]="showTable" class="info-text">
+            Select a file and bucket.
+        </div>
       </div>
     </div>
   </div>
